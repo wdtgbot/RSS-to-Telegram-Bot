@@ -1,107 +1,125 @@
-# RSS to Telegram bot
+<p align="center">
+<img src="docs/resources/RSStT_icon.svg" alt="RSS to Telegram Bot" width="100">
+</p>
+<h1 align="center">RSS to Telegram Bot</h1>
 
-**专为短动态类消息设计的 RSS Bot**
+<p align="center"><b>A Telegram RSS bot that cares about your reading experience</b></p>
 
-[![Build Status](https://img.shields.io/github/workflow/status/Rongronggg9/RSS-to-Telegram-Bot/Publish%20Docker%20image)](https://hub.docker.com/r/rongronggg9/rss-to-telegram)
-[![Docker Pulls](https://img.shields.io/docker/pulls/rongronggg9/rss-to-telegram)](https://hub.docker.com/r/rongronggg9/rss-to-telegram)
+[![GitHub commit activity](https://img.shields.io/github/commit-activity/m/Rongronggg9/RSS-to-Telegram-Bot?logo=git&label=commit)](https://github.com/Rongronggg9/RSS-to-Telegram-Bot/commits)
+[![Translating status](https://img.shields.io/weblate/progress/rss-to-telegram-bot?logo=weblate&color=informational)](https://hosted.weblate.org/engage/rss-to-telegram-bot/)
+[![Code quality](https://img.shields.io/codefactor/grade/github/Rongronggg9/RSS-to-Telegram-Bot?logo=codefactor)](https://www.codefactor.io/repository/github/rongronggg9/rss-to-telegram-bot)
 [![GitHub stars](https://img.shields.io/github/stars/Rongronggg9/Rss-to-Telegram-Bot?style=social)](https://github.com/Rongronggg9/RSS-to-Telegram-Bot/stargazers)
+[![GitHub forks](https://img.shields.io/github/forks/Rongronggg9/RSS-to-Telegram-Bot?style=social)](https://github.com/Rongronggg9/RSS-to-Telegram-Bot/fork)
 
-<a href="https://github.com/Rongronggg9/RSS-to-Telegram-Bot"><img src="https://rongronggg9.github.io/external-resources/RSS-to-Telegram-Bot/RSStT_icon.svg" width = "256" height = "256"  alt="RSStT_icon"/><a/>
+[![Telegram bot](https://img.shields.io/badge/Telegram%20Bot-%40RSStT__Bot-229ed9?logo=telegram&style=for-the-badge)](https://t.me/RSStT_Bot)
+[![Telegram group](https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fapi.swo.moe%2Fstats%2Ftelegram%2FRSStT_Group&query=count&color=2CA5E0&label=Telegram%20Group&logo=telegram&cacheSeconds=3600&style=for-the-badge)](https://t.me/RSStT_Group)
+[![Telegram channel](https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fapi.swo.moe%2Fstats%2Ftelegram%2FRSStT_Channel&query=count&color=2CA5E0&label=Telegram%20Channel&logo=telegram&cacheSeconds=3600&style=for-the-badge)](https://t.me/RSStT_Channel)
 
-[更新日志 CHANGELOG](CHANGELOG.md)
+| [简体中文 README] | [CHANGELOG] | [FAQ] | [Documentation] | [Channels Using RSStT] |
+|:-------------:|:-----------:|:-----:|-----------------|:----------------------:|
 
-本项目现改以 AGPLv3 许可证分发，这是为了将来的多用户功能准备的。
+[简体中文 README]: README.zh.md
 
-加入频道 [@RSStT_Channel](https://t.me/RSStT_Channel) 以获取更新资讯；加入群组 [@RSStT_Group](https://t.me/RSStT_Group) 以参与讨论或反馈问题。
+[CHANGELOG]: docs/CHANGELOG.md
 
-[![Deploy on Railway](https://railway.app/button.svg)](https://railway.app/new/template?template=https%3A%2F%2Fgithub.com%2FRongronggg9%2FRSS-to-Telegram-Bot%2Ftree%2Fdev&plugins=redis&envs=TOKEN%2CCHATID%2CMANAGER%2CDELAY&optionalEnvs=DELAY&TOKENDesc=%E4%BD%A0%E5%9C%A8+%40BotFather+%E7%94%B3%E8%AF%B7%E5%88%B0%E7%9A%84+bot+%E7%9A%84+token&CHATIDDesc=%E4%BD%A0%E7%9A%84+userid%EF%BC%88%E7%BA%AF%E6%95%B0%E5%AD%97%EF%BC%8C%E4%BB%8E+%40userinfobot%EF%BC%89%E8%8E%B7%E5%8F%96%EF%BC%9B%E6%88%96%E8%80%85%E9%9C%80%E8%A6%81%E6%8E%A8%E9%80%81%E5%88%B0%E7%9A%84%E9%A2%91%E9%81%93%E7%94%A8%E6%88%B7%E5%90%8D%EF%BC%88%E6%A0%BC%E5%BC%8F%EF%BC%9A%40channel%EF%BC%89&MANAGERDesc=%E4%BD%A0%E7%9A%84+userid&DELAYDesc=%E9%97%B4%E9%9A%94%E5%A4%9A%E4%B9%85%E6%A3%80%E6%9F%A5%E4%B8%80%E6%AC%A1%E8%AE%A2%E9%98%85%E6%9B%B4%E6%96%B0%EF%BC%88%E5%8D%95%E4%BD%8D%EF%BC%9A%E7%A7%92%EF%BC%89&referralCode=PEOFMi)
+[FAQ]: docs/FAQ.md
 
-[Railway 部署教程](https://telegra.ph/%E9%80%9A%E8%BF%87-Railway-%E9%83%A8%E7%BD%B2-RSS-to-Telegram-Bot-09-13)
+[Documentation]: docs
 
-## 功能
+[Channels Using RSStT]: docs/channels-using-rsstt.md
 
-- 将 RSS 全文发送到 Telegram
-    - 还原原有格式
-    - 自动判断 RSS 源的标题是否为自动填充，并自动选择是否略去标题
-    - 自动显示作者名
-    - 将微博表情或 emoji shortcodes 转化为 emoji
-        - 仅限有同义 emoji 的微博表情
-    - 超长消息自动分割
-        - 如果配置了 Telegraph，则会自动通过 Telegraph 发送
-    - 支持对 Telegram Bot API 和 RSS 订阅分别配置代理
-- 支持含媒体消息转发
-    - 至多 10 个媒体，可以是图片或视频
-    - 自动缩小大于 5MB 或尺寸过大 (宽度 + 高度 <= 10000) 的图片
-        - 仅限微博图源，其他图源的图片将被转为链接附加至消息末尾
-- 支持 OPML 导入导出
-- 转发失败时向 `MANAGER` 发送含错误信息的提示 **(未设定则直接发送至 `CHATID` )**
-- **设定 `MANAGER` 时只会响应对应用户的命令 (未设定则只响应 `CHATID` 对应用户的命令)**
+<table>
+    <tr>
+        <td><img src="docs/resources/example5.png" alt="Screenshot"></td>
+        <td rowspan="2"><img src="docs/resources/example7.png" alt="Screenshot"></td>
+        <td rowspan="2"><img src="docs/resources/example8.png" alt="Screenshot"></td>
+    </tr>
+    <tr>
+        <td><img src="docs/resources/example6.png" alt="Screenshot"></td>
+    </tr>
+</table>
 
-<img src="https://rongronggg9.github.io/external-resources/RSS-to-Telegram-Bot/example1.png" width = "500" alt="example1"/>
-<img src="https://rongronggg9.github.io/external-resources/RSS-to-Telegram-Bot/example3.png" width = "500" alt="example3"/>
+## Highlights
 
-## 已知的问题
+- Multi-user
+- I18n
+    - English, Chinese, Cantonese, Italian, and [more](docs/translation-guide.md)!
+- The content of the posts of an RSS feed will be sent to Telegram
+    - Keep rich-text format
+    - Keep media (customizable)
+        - Images, Videos, and Audio both in the post content and enclosure; Documents in the post enclosure
+        - Long images will be sent as files to prevent Telegram from compressing the image and making it unreadable
+        - Drop annoying icons, they break the reading experience
+    - Automatically replace emoji shortcodes with emoji
+    - Automatically replace emoji images with emoji or its description text
+    - Automatically determine whether the title of the RSS feed is auto-filled, if so, omit the title (customizable)
+    - Automatically show the author-name (customizable)
+    - Automatically split too-long messages
+    - Messages can be sent as Telegraph posts (customizable)
+- [Various customizable formatting settings](docs/formatting-settings.md)
+    - Hashtags, custom title, etc.
+- Individual proxy settings for Telegram and RSS feeds
+- OPML importing and exporting (keep custom title)
+- Optimized performance (see also the [FAQ](docs/FAQ.md#q-how-is-the-performance-of-the-bot))
+- User-friendly
+- HTTP Caching
 
-- 用于频道时，无法接受频道内的命令，需直接对 bot 在私人对话中发送命令
-    - **必须设定 `MANAGER` 并使用其对应的用户操作，否则不会响应**
-- 没有多用户功能，仅可向一个用户/频道 ( `CHATID` ) 推送 RSS
+## Deployment
 
-## 使用
+[![dockeri.co](https://dockerico.blankenship.io/image/rongronggg9/rss-to-telegram)](https://hub.docker.com/r/rongronggg9/rss-to-telegram)\
+[![Build status (master)](https://img.shields.io/github/actions/workflow/status/Rongronggg9/RSS-to-Telegram-Bot/publish-docker-image.yml?branch=master&label=build&logo=docker)](https://github.com/Rongronggg9/RSS-to-Telegram-Bot/actions/workflows/publish-docker-image.yml?query=branch%3Amaster)
+[![Build status (dev)](https://img.shields.io/github/actions/workflow/status/Rongronggg9/RSS-to-Telegram-Bot/publish-docker-image.yml?branch=dev&label=build%20%28dev%29&logo=docker)](https://github.com/Rongronggg9/RSS-to-Telegram-Bot/actions/workflows/publish-docker-image.yml?query=branch%3Adev)
 
-> [RSS to Telegram bot，专为短动态类消息设计的 RSS Bot。](https://github.com/Rongronggg9/RSS-to-Telegram-Bot)
->
-> 成功添加一个 RSS 源后, 机器人就会开始检查订阅，每 300 秒一次。 (可修改)
->
-> 标题为只是为管理 RSS 源而设的，可随意选取，但不可有空格。
->
-> 命令:
->
-> **<u>/help</u>** : 发送这条消息
->
-> **<u>/add</u> <u>标题</u> <u>RSS</u>** : 添加订阅
->
-> **<u>/remove</u> <u>标题</u>** : 移除订阅
->
-> **<u>/list</u>** : 列出数据库中的所有订阅，包括它们的标题和 RSS 源
->
-> **<u>/test</u> <u>RSS</u> <u>编号起点(可选)</u> <u>编号终点(可选)</u>** : 从 RSS 源处获取一条 post (编号为 0-based, 不填或超出范围默认为 0，不填编号终点默认只获取一条 post)，或者直接用 `all` 获取全部
->
-> 您的 chatid 是: 0123456789
+[![PyPI](https://img.shields.io/pypi/v/rsstt?logo=pypi&logoColor=white&label=PyPI)](https://pypi.org/project/rsstt/)
+[![TestPyPI](https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Ftest.pypi.org%2Fpypi%2Frsstt%2Fjson&query=%24.info.version&prefix=v&logo=pypi&logoColor=white&label=TestPyPI)](https://test.pypi.org/project/rsstt/)
+[![PyPI - Python Version](https://img.shields.io/pypi/pyversions/rsstt?logo=python&label=&labelColor=white)](https://www.python.org)\
+[![PyPI publish status](https://img.shields.io/github/actions/workflow/status/Rongronggg9/RSS-to-Telegram-Bot/publish-to-pypi.yml?label=publish&logo=pypi&logoColor=white)](https://github.com/Rongronggg9/RSS-to-Telegram-Bot/actions/workflows/publish-to-pypi.yml)
+[![TestPyPI publish status](https://img.shields.io/github/actions/workflow/status/Rongronggg9/RSS-to-Telegram-Bot/publish-to-test-pypi.yml?label=publish%20(TestPyPI)&logo=pypi&logoColor=white)](https://github.com/Rongronggg9/RSS-to-Telegram-Bot/actions/workflows/publish-to-test-pypi.yml)
+[![PyPI - Downloads](https://img.shields.io/pypi/dm/rsstt?logo=pypi&logoColor=white)](https://pypi.org/project/rsstt/)
 
-### 准备
+It is quite easy to deploy your RSStT instance. The most recommended way to deploy RSStT is Docker Compose: it is suitable for virtually all VPS. [Railway.app](https://railway.app) (a PaaS platform) is also officially supported. You may also install RSStT from [PyPI](https://pypi.org/project/rsstt/) (tracking `master` branch) or [TestPyPI](https://test.pypi.org/project/rsstt/) (tracking `dev` branch, which is always up-to-date) using pip. For developers or experienced users, dirty run from source is also an option.
 
-1. 前往 [@BotFather](https://t.me/BotFather) 创建一个 bot ，并记录下 token ，稍后填入 `TOKEN`
-2. 获得您的 userid (可使用 [@userinfobot](https://t.me/userinfobot) 获取) 并记录下来，稍后填入 `CHATID`
-    - 您也可使用一个频道来接收推送，此时 `CHATID` 格式为 `@channelusername` (不要忘记将 bot 添加到频道里!)
-3. 获得管理员 (通常为您) 的 userid ，方法同上，稍后填入 `MANAGER`
+<a href="docs/deployment-guide.md#option-2-railwayapp"><img src="https://railway.app/button.svg" height="30" alt="Deploy on Railway"></a>
 
-### Docker
+For more details, refer to the [deployment guide](docs/deployment-guide.md).
 
-For the docker image go to: https://hub.docker.com/r/rongronggg9/rss-to-telegram
+## Translation
 
-```sh
-mkdir rsstt
-cd rsstt
-wget https://raw.githubusercontent.com/Rongronggg9/RSS-to-Telegram-Bot/master/docker-compose.yml.sample -O docker-compose.yml
-vi docker-compose.yml  # 自行按文件中的注释修改 docker-compose.yml
-docker-compose up -d
-```
+Read the translation guide [here](docs/translation-guide.md).
 
-### Installation
+You can help to translate the bot using [Hosted Weblate](https://hosted.weblate.org/projects/rss-to-telegram-bot/). Special thanks to their free hosting service for libre projects!
 
-Python 3.8+
+<a href="https://hosted.weblate.org/engage/rss-to-telegram-bot/"><img src="https://hosted.weblate.org/widgets/rss-to-telegram-bot/-/glossary/multi-auto.svg" width = "500" alt="" /></a>
 
-Remember to replace `<arg>`, `<` and `>` should be deleted.
+## Using the public bot
 
-```sh
-git clone https://github.com/Rongronggg9/RSS-to-Telegram-Bot.git
-cd RSS-to-Telegram-Bot
-pip3 install -r requirements.txt
-export PYTHONUNBUFFERED=1
-# 参照 docker-compose.yml export 环境变量
-python3 -u telegramRSSbot.py
-```
+The [public bot](https://t.me/RSStT_Bot) comes with absolutely no warranty. I will try my best to maintain it, but I cannot guarantee that it will always work perfectly. Meanwhile, you should "fair use" the bot, avoid subscribing to too many RSS feeds.\
+If you use the [public bot](https://t.me/RSStT_Bot) in your Channel, consider mentioning the bot (or this project) in your channel description (or pinned message) to let more people know about it. That's not a compulsion.
 
-## 备注
+## Known channels using RSStT
 
-本项目原是 [BoKKeR/RSS-to-Telegram-Bot](https://github.com/BoKKeR/RSS-to-Telegram-Bot) 的 fork ，目前除了数据库和命令名已经没有任何相像的地方了。
+Want to preview what the messages sent by RSStT look like? Here is a [list of channels using RSStT](docs/channels-using-rsstt.md).
+
+## Licensing
+
+<img src="https://www.gnu.org/graphics/agplv3-with-text-162x68.png" alt="AGPLv3 logo" width="100" align="right">
+
+This project is licensed under [AGPLv3+](LICENSE). Closed-source distribution or bot-hosting are strictly prohibited. If you distribute or host it with code modifications, make sure the source code is available to anyone who can use the bot (by editing the repo URL in [`src/i18n/__init__.py`](src/i18n/__init__.py)).
+
+    RSS to Telegram Bot
+    Copyright (C) 2020-2024  Rongrong <i@rong.moe>
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU Affero General Public License as
+    published by the Free Software Foundation, either version 3 of the
+    License, or (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU Affero General Public License for more details.
+
+    You should have received a copy of the GNU Affero General Public License
+    along with this program.  If not, see <https://www.gnu.org/licenses/>.
+
+The repository was forked from [BoKKeR/RSS-to-Telegram-Bot](https://github.com/BoKKeR/RSS-to-Telegram-Bot) in 2020. Since some time in 2021, they share no common codebase and should be considered as completely different projects.
